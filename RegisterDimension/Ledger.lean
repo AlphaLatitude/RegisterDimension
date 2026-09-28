@@ -1,7 +1,7 @@
 import RegisterDimension
 
 /-! # The axiom ledger of the check of *The Dimension of Space from the Granularity of Hilbert Space*
-(v16-29)
+(v16-34)
 
 For every main theorem, the axioms its proof depends on.  A physical input is never an axiom
 here: it is a named hypothesis in the statement of the theorem that uses it.  The expected output
@@ -33,7 +33,8 @@ mathematics in Lean; `sorryAx` would flag an unfinished proof. -/
 
 -- Sec. IV, the vertex: the alphabet, the span, and `d = 3` from Postulate 2
 #print axioms Register.Vertex.alphabet_card
-#print axioms Register.Vertex.grid_card
+#print axioms Register.Vertex.alphabet_card_zero
+#print axioms Register.Vertex.cells_card
 #print axioms Register.Vertex.span_of_postulate
 #print axioms Register.Vertex.finrank_span_le_of_sum_zero
 #print axioms Register.Vertex.finrank_span_eq_of_sum_zero
@@ -44,7 +45,31 @@ mathematics in Lean; `sorryAx` would flag an unfinished proof. -/
 #print axioms Register.Vertex.coincidence_two_cells
 #print axioms Register.Vertex.eigenspace_preserved
 
--- Secs. V–VII, the sphere: the grid, the areas, the pixel counts, the cell
+-- Secs. II and IV, the setting and conservation from Postulate 1
+#print axioms Register.Conservation.shifts_commute
+#print axioms Register.Conservation.turn_comm
+#print axioms Register.Conservation.eigenvalue_root
+#print axioms Register.Conservation.productMode_shift
+#print axioms Register.Conservation.root_sum
+#print axioms Register.Conservation.jointMode_shift
+#print axioms Register.Conservation.root_eq_iff
+#print axioms Register.Conservation.uniform_mode_zero
+#print axioms Register.Conservation.total_mode_conserved
+#print axioms Register.Conservation.vertex_exists
+#print axioms Register.Conservation.eq_of_window
+#print axioms Register.Conservation.three_leg_conservation
+#print axioms Register.Conservation.sum_zero_of_components
+
+-- Sec. IV, `d = 3` from the two postulates
+#print axioms Register.Derivation.Emission.conserve
+#print axioms Register.Derivation.Emission.finrank_legs
+#print axioms Register.Derivation.three_from_postulates
+#print axioms Register.Derivation.model_consistent
+
+-- Sec. IV, two rings share at most two cells
+#print axioms Register.Planes.two_planes_meet
+
+-- Secs. V–VII, the sphere: the areas, the pixel counts, the cell
 #print axioms Register.Sphere.u_two_sphere
 #print axioms Register.Sphere.cos_sq_half_eq
 #print axioms Register.Sphere.band_area
@@ -87,30 +112,18 @@ mathematics in Lean; `sorryAx` would flag an unfinished proof. -/
 #print axioms Register.Root.seven_halves_factor
 #print axioms Register.Root.five_halves_factor
 
--- The numbers of the paper
-#print axioms Register.DimensionNumerics.Lval_bounds
-#print axioms Register.DimensionNumerics.mom_count
-#print axioms Register.DimensionNumerics.Npix_three_val
-#print axioms Register.DimensionNumerics.Npix_four_val
-#print axioms Register.DimensionNumerics.Npix_five_val
-#print axioms Register.DimensionNumerics.ratios_val
+-- The numbers of the paper, for every L between 10^61 and 10^62
 #print axioms Register.DimensionNumerics.inv_pi_val
-#print axioms Register.DimensionNumerics.horizon_units
-#print axioms Register.DimensionNumerics.uniqueness_range
-#print axioms Register.DimensionNumerics.ang_mom_val
-#print axioms Register.DimensionNumerics.capacity_205
-#print axioms Register.DimensionNumerics.nmax_205
-#print axioms Register.DimensionNumerics.log_L0_bounds
+#print axioms Register.DimensionNumerics.pi_val
 #print axioms Register.DimensionNumerics.log_pi_bounds
 #print axioms Register.DimensionNumerics.log_ten_bounds
-#print axioms Register.DimensionNumerics.bits
-#print axioms Register.DimensionNumerics.bits_three
-#print axioms Register.DimensionNumerics.bits_area
-#print axioms Register.DimensionNumerics.leading_term
-#print axioms Register.DimensionNumerics.bound_value
-#print axioms Register.DimensionNumerics.pixel_choice
-#print axioms Register.DimensionNumerics.root_at_L0
-#print axioms Register.DimensionNumerics.factor_of_ten
-#print axioms Register.DimensionNumerics.pixel_shift_val
-#print axioms Register.DimensionNumerics.seven_halves_factor_val
-#print axioms Register.DimensionNumerics.five_halves_factor_val
+#print axioms Register.DimensionNumerics.log_L_range
+#print axioms Register.DimensionNumerics.leading_term_range
+#print axioms Register.DimensionNumerics.bound_value_range
+#print axioms Register.DimensionNumerics.pixel_choice_range
+#print axioms Register.DimensionNumerics.root_range
+#print axioms Register.DimensionNumerics.uniqueness_range
+#print axioms Register.DimensionNumerics.pixel_shift_range
+#print axioms Register.DimensionNumerics.seven_halves_range
+#print axioms Register.DimensionNumerics.five_halves_range
+#print axioms Register.DimensionNumerics.capacity_range

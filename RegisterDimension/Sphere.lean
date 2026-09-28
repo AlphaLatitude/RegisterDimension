@@ -7,7 +7,7 @@ import Mathlib.Tactic.Positivity
 
 /-!
 # The cells of a sphere in `d` dimensions: Secs. V–VII of *The Dimension of Space from the
-Granularity of Hilbert Space* (v16-29)
+Granularity of Hilbert Space* (v16-34)
 
 * `u_two_sphere`, `cos_sq_half_eq`: on the two-sphere the fraction of the area within polar angle
   `θ` of the pole is `u₁ = (1 − cos θ)/2`, Eq. (u), so `cos²(θ/2) = 1 − u₁` is Palmer's `m/L`.

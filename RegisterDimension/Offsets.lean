@@ -5,7 +5,7 @@ import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.LinearCombination
 
 /-!
-# The offsets: Sec. IV of *The Dimension of Space from the Granularity of Hilbert Space* (v16-29)
+# The offsets: Sec. IV of *The Dimension of Space from the Granularity of Hilbert Space* (v16-34)
 
 Each cell has its own zero mark for phase (Postulate 1), and a move from cell `a` to cell `b` adds
 to the phase an amount that belongs to the pair, their offset.  Phase comes in whole notches, so

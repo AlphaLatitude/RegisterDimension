@@ -10,14 +10,14 @@ import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # The dimension of an interaction: Sec. IV of *The Dimension of Space from the Granularity of
-Hilbert Space* (v16-29)
+Hilbert Space* (v16-34)
 
 The count of Sec. IV, with every step a theorem and the junctions between the steps checked too.
 Two definitions carry the paper's reading of the register into Lean: the readings of one leg's
 momentum in a span of dimension `s` are a magnitude with `L` values and `s − 1` angles with `L`
 values each (`alphabet`), and the cells of the sphere are `L` values in each of `d − 1` coordinates
-(`grid`).  So a leg has `L^s` momenta (`alphabet_card`) and the sphere has `L^(d−1)` cells
-(`grid_card`, Eq. (cells)).  Postulate 2 puts one cell on each momentum, so the two counts are
+(`cells`).  So a leg has `L^s` momenta (`alphabet_card`) and the sphere has `L^(d−1)` cells
+(`cells_card`, Eq. (cells)).  Postulate 2 puts one cell on each momentum, so the two counts are
 equal, and `L^s = L^(d−1)` gives `s = d − 1` (`span_of_postulate`).  Conserved momenta, `n + 1`
 of them summing to zero, span at most `n` dimensions (`finrank_span_le_of_sum_zero`), exactly `n`
 when the first `n` are independent (`finrank_span_eq_of_sum_zero`).  Given the momenta of a
@@ -46,7 +46,7 @@ abbrev alphabet (L s : ℕ) := Fin L × (Fin (s - 1) → Fin L)
 
 /-- the cells of the sphere in `d` dimensions, Eq. (cells): `L` values in each of `d − 1`
 coordinates -/
-abbrev grid (L d : ℕ) := Fin (d - 1) → Fin L
+abbrev cells (L d : ℕ) := Fin (d - 1) → Fin L
 
 /-- **A leg has `L^s` momenta** (Sec. IV). -/
 theorem alphabet_card (L s : ℕ) (hs : 1 ≤ s) : Fintype.card (alphabet L s) = L ^ s := by
@@ -55,8 +55,13 @@ theorem alphabet_card (L s : ℕ) (hs : 1 ≤ s) : Fintype.card (alphabet L s) =
   congr 1
   omega
 
+/-- the alphabet of a leg whose momentum is confined to a point: a magnitude only, `L` readings -/
+theorem alphabet_card_zero (L : ℕ) : Fintype.card (alphabet L 0) = L := by
+  show Fintype.card (Fin L × (Fin 0 → Fin L)) = L
+  rw [Fintype.card_prod, Fintype.card_fun, Fintype.card_fin, Fintype.card_fin, pow_zero, mul_one]
+
 /-- **The sphere has `L^(d−1)` cells**, Eq. (cells). -/
-theorem grid_card (L d : ℕ) : Fintype.card (grid L d) = L ^ (d - 1) := by
+theorem cells_card (L d : ℕ) : Fintype.card (cells L d) = L ^ (d - 1) := by
   show Fintype.card (Fin (d - 1) → Fin L) = L ^ (d - 1)
   rw [Fintype.card_fun, Fintype.card_fin, Fintype.card_fin]
 
@@ -111,10 +116,10 @@ The proof computes the span's dimension, `n`, turns both counts into powers of `
 theorem dimension_eq_legs (L n d : ℕ) (hL : 2 ≤ L) (hn : 1 ≤ n) (v : Fin (n + 1) → V)
     (hsum : ∑ i, v i = 0) (hind : LinearIndependent ℝ (v ∘ Fin.castSucc))
     (hpost : Fintype.card (alphabet L (finrank ℝ (span ℝ (Set.range v)))) =
-      Fintype.card (grid L d)) : d = n + 1 := by
+      Fintype.card (cells L d)) : d = n + 1 := by
   have hs : finrank ℝ (span ℝ (Set.range v)) = n := finrank_span_eq_of_sum_zero n v hsum hind
   have h1 := alphabet_card L (finrank ℝ (span ℝ (Set.range v))) (by rw [hs]; exact hn)
-  rw [h1, grid_card, hs] at hpost
+  rw [h1, cells_card, hs] at hpost
   have := span_of_postulate L n d hL hpost
   omega
 
@@ -124,7 +129,7 @@ Postulate 2, `d = 3`. -/
 theorem three (L d : ℕ) (hL : 2 ≤ L) (v : Fin 3 → V) (hsum : ∑ i, v i = 0)
     (hind : LinearIndependent ℝ (v ∘ Fin.castSucc))
     (hpost : Fintype.card (alphabet L (finrank ℝ (span ℝ (Set.range v)))) =
-      Fintype.card (grid L d)) : d = 3 :=
+      Fintype.card (cells L d)) : d = 3 :=
   dimension_eq_legs L 2 d hL (by norm_num) v hsum hind hpost
 
 /-- **Counting the orientation of the plane would break the count** (Sec. IV): a plane's
@@ -144,8 +149,8 @@ theorem coincidence (L : ℕ) (hL : 0 < L) :
   rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, ← mul_assoc,
     mul_one_div_cancel hL', one_mul]
 
-/-- **If two rings share two cells**, as rings in different planes do (Sec. IV), the coincidence
-of uncorrelated strings on them is `2/L²`; the file checks the arithmetic. -/
+/-- **Two rings in different planes share at most two cells** (`Planes.two_planes_meet`), so the
+coincidence of uncorrelated strings on them is at most `2/L²` (Sec. IV). -/
 theorem coincidence_two_cells (L : ℕ) :
     ∑ _j : Fin 2, ((1 : ℝ) / L) * (1 / L) = 2 / L ^ 2 := by
   rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]

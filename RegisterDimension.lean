@@ -1,6 +1,9 @@
 import RegisterDimension.Ring
 import RegisterDimension.Offsets
 import RegisterDimension.Vertex
+import RegisterDimension.Conservation
+import RegisterDimension.Derivation
+import RegisterDimension.Planes
 import RegisterDimension.Sphere
 import RegisterDimension.Root
 import RegisterDimension.Numerics

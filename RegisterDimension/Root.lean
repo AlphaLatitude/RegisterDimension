@@ -6,7 +6,7 @@ import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.Real.Pi.Bounds
 
 /-!
-# The relaxed count: Sec. VI of *The Dimension of Space from the Granularity of Hilbert Space* (v16-29)
+# The relaxed count: Sec. VI of *The Dimension of Space from the Granularity of Hilbert Space* (v16-34)
 
 Sec. VI asks what dimension the horizon would have if the sphere of radius `Lℓ_P/2π` held exactly
 `L²` Planck pixels, with `d` allowed to be real: the equation `Ω_{d−1}(L/2π)^{d−1} = L²`, that is

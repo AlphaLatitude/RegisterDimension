@@ -5,7 +5,7 @@ import Mathlib.Tactic.Positivity
 import Mathlib.Tactic.LinearCombination
 
 /-!
-# One ring: Secs. II–III of *The Dimension of Space from the Granularity of Hilbert Space* (v16-29)
+# One ring: Secs. II–III of *The Dimension of Space from the Granularity of Hilbert Space* (v16-34)
 
 The results that one ring of `L` cells gives, formalized on functions `ℤ → ℂ` that repeat after
 `L` cells (a function on the ring).  Nothing is assumed beyond Postulate 1 read as: the shift `X`
